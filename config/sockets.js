@@ -27,8 +27,12 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // transports: [ 'websocket' ],
+  transports: [ 'websocket' ],
 
+  adapter: '@sailshq/socket.io-redis',
+  host: 'localhost',
+  port: 36379,
+  db: 7,
 
   /***************************************************************************
   *                                                                          *
