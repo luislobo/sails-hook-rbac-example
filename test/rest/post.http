@@ -1,0 +1,11 @@
+#@hostname = localhost
+#@port = 30080
+
+###
+# create a post
+GET http://{{hostname}}:{{port}}/post/create?subject=test&author=60d014eeefc808d6d2afb7ad
+
+###
+# create a post
+GET http://{{hostname}}:{{port}}/post
+
