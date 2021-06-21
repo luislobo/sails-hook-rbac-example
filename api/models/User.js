@@ -49,9 +49,10 @@ module.exports = {
     },
 
     lastSeenAt: {
-      type: 'number',
+      type: 'ref',
+      columnType: 'datetime',
       description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
-      example: 1502844074211,
+      example: '2021-06-21T04:20:31.538Z',
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
