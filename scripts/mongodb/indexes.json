@@ -1,0 +1,15 @@
+{
+  "user": [
+    {
+      "key": {
+        "_id": 1
+      }
+    },
+    {
+      "key": {
+        "emailAddress": 1
+      },
+      "unique": true
+    }
+  ]
+}

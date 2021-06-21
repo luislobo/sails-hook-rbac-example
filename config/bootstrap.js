@@ -27,4 +27,10 @@ module.exports.bootstrap = async function() {
   // ]);
   // ```
 
+  if (sails.config.custom.buildIndexes) {
+    sails.log.info('Building Indexes...');
+    await require('../scripts/mongodb/buildIndexes.js')();
+    sails.log.info('...Indexes created');
+  }
+
 };
