@@ -1,0 +1,55 @@
+version: '3'
+services:
+#  shre-gui:
+#    container_name: shre-gui
+#    build: ./gui
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - shre-api
+#    networks:
+#      - shre-network
+#
+#  shre-api:
+#    container_name: shre-api
+#    restart: always
+#    build:
+#      context: shre-api
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - shre-redis
+#      - shre-mongodb
+#    networks:
+#      - shre-network
+
+  shre-redis:
+    container_name: shre-redis
+    image: redis:5
+    ports:
+      - "36379:6379"
+    restart: always
+    networks:
+      - shre-network
+
+  shre-mongodb:
+    container_name: shre-mongodb
+    image: mongo:4.4
+    restart: always
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - shre-mongo-data:/data/db
+    ports:
+      - "37017:27017"
+    #command: mongod --logpath=/dev/null # --quiet
+    command: mongod
+    networks:
+      - shre-network
+
+volumes:
+  shre-mongo-data:
+networks:
+  shre-network:
