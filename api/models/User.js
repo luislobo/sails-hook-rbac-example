@@ -66,4 +66,9 @@ module.exports = {
 
   },
 
+  beforeCreate: (recordToCreate, proceed) => {
+    recordToCreate.lastSeenAt = new Date();
+    proceed();
+  }
+
 };
