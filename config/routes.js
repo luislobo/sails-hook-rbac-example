@@ -10,29 +10,92 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-   *                                                                          *
-   * Make the view located at `views/homepage.ejs` your home page.            *
-   *                                                                          *
-   * (Alternatively, remove this and add an `index.html` file in your         *
-   * `assets` directory)                                                      *
-   *                                                                          *
-   ***************************************************************************/
-
   '/': {
     view: 'pages/homepage',
     rbac: {anonymous: {}},
   },
 
-  /***************************************************************************
-   *                                                                          *
-   * More custom routes here...                                               *
-   * (See https://sailsjs.com/config/routes for examples.)                    *
-   *                                                                          *
-   * If a request to a URL doesn't match any of the routes in this file, it   *
-   * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
-   * not match any of those, it is matched against static assets.             *
-   *                                                                          *
-   ***************************************************************************/
+  '/login': {
+    view: 'pages/login',
+    rbac: {anonymous: {}},
+  },
+
+  'post /login': {
+    controller: 'auth',
+    action: 'login',
+    rbac: {anonymous: {}},
+  },
+
+  '/signup': {
+    view: 'pages/signup',
+    rbac: {anonymous: {}},
+  },
+
+  'post /signup': {
+    controller: 'auth',
+    action: 'signup',
+    rbac: {anonymous: {}},
+  },
+
+  '/forgot-password': {
+    view: 'pages/forgot-password',
+    rbac: {anonymous: {}},
+  },
+
+  'post /forgot-password': {
+    controller: 'auth',
+    action: 'forgotPassword',
+    rbac: {anonymous: {}},
+  },
+
+  'get /post': {
+    controller: 'post',
+    action: 'find',
+    rbac: {anonymous: {}},
+  },
+
+  'get /post/:postId': {
+    controller: 'post',
+    action: 'findOne',
+    rbac: {anonymous: {}},
+  },
+
+  'post /post': {
+    controller: 'post',
+    action: 'create',
+    rbac: {normal: {}},
+  },
+
+  'put /post/:postId': {
+    controller: 'post',
+    action: 'update',
+    rbac: {
+      normal: {
+        when: 'isAuthor',
+      },
+      admin: {},
+    },
+  },
+
+  'delete /post/:postId': {
+    controller: 'post',
+    action: 'delete',
+    rbac: {
+      normal: {
+        when: function(params, next){
+          return sails.services.RbacHelpers.isAuthor(params, next);
+        },
+      },
+      admin: {},
+    },
+  },
+
+  'delete /user/:userId': {
+    controller: 'user',
+    action: 'delete',
+    rbac: {
+      admin: {},
+    },
+  },
 
 };
