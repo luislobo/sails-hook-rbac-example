@@ -86,8 +86,8 @@ module.exports = {
   signup: function(inputs, cb) {
     // Create a user
     User.create({
-      name: inputs.name,
-      email: inputs.email,
+      fullName: inputs.fullName,
+      emailAddress: inputs.emailAddress,
       // TODO: But encrypt the password first
       password: inputs.password,
     }).exec(cb);

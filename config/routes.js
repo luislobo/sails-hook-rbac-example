@@ -11,12 +11,13 @@
 module.exports.routes = {
 
   '/': {
-    view: 'pages/homepage',
+    controller: 'post',
+    action: 'index',
     rbac: {anonymous: {}},
   },
 
-  '/login': {
-    view: 'pages/login',
+  'get /login': {
+    view: 'pages/auth/login',
     rbac: {anonymous: {}},
   },
 
@@ -26,8 +27,8 @@ module.exports.routes = {
     rbac: {anonymous: {}},
   },
 
-  '/signup': {
-    view: 'pages/signup',
+  'get /signup': {
+    view: 'pages/auth/signup',
     rbac: {anonymous: {}},
   },
 
@@ -37,14 +38,14 @@ module.exports.routes = {
     rbac: {anonymous: {}},
   },
 
-  '/forgot-password': {
-    view: 'pages/forgot-password',
+  'get /forgot-password': {
+    view: 'pages/auth/forgot-password',
     rbac: {anonymous: {}},
   },
 
   'post /forgot-password': {
     controller: 'auth',
-    action: 'forgotPassword',
+    action: 'forgot',
     rbac: {anonymous: {}},
   },
 
@@ -82,7 +83,7 @@ module.exports.routes = {
     action: 'delete',
     rbac: {
       normal: {
-        when: function(params, next){
+        when: function(params, next) {
           return sails.services.RbacHelpers.isAuthor(params, next);
         },
       },

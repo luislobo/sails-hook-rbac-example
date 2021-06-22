@@ -22,19 +22,19 @@ module.exports.session = {
    *                                                                          *
    ***************************************************************************/
   secret: '931b025a4ea87b89dde541af0c0fe697',
-
-  adapter: 'connect-redis',
-  host: 'localhost',
-  port: 36379,
-  db: 1,
-  prefix: 'sess:',
-  ttl: SESSION_TTL,
-
-  cookie: {
-    httpOnly: true,
-    maxAge: SESSION_TTL * SECOND,
-    secure: true,
-  },
+  //
+  // adapter: 'connect-redis',
+  // host: 'localhost',
+  // port: 36379,
+  // db: 1,
+  // prefix: 'sess:',
+  // ttl: SESSION_TTL,
+  //
+  // cookie: {
+  //   httpOnly: true,
+  //   maxAge: SESSION_TTL * SECOND,
+  //   secure: true,
+  // },
 
   /***************************************************************************
    *                                                                          *
