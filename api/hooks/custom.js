@@ -9,7 +9,12 @@ module.exports = function() {
           if (!req.session) { return next(); }
 
           // Not logged in? Proceed as usual.
-          if (!req.session.userId) { return next(); }
+          if (!req.session.userId) {
+            req.me = {
+              role: 'anonymous',
+            };
+            return next();
+          }
 
           // Otherwise, look up the logged-in user.
           var loggedInUser = await User.findOne({
@@ -21,8 +26,8 @@ module.exports = function() {
           // and then send the "unauthorized" response.
           if (!loggedInUser) {
             sails.log.warn(
-              'Somehow, the user record for the logged-in user (`' +
-              req.session.userId + '`) has gone missing....');
+                'Somehow, the user record for the logged-in user (`' +
+                req.session.userId + '`) has gone missing....');
             delete req.session.userId;
             return res.unauthorized();
           }
@@ -31,7 +36,7 @@ module.exports = function() {
           // > Note that we make sure `req.me` doesn't already exist first.
           if (req.me !== undefined) {
             throw new Error(
-              'Cannot attach logged-in user as `req.me` because this property already exists!  (Is it being attached somewhere else?)');
+                'Cannot attach logged-in user as `req.me` because this property already exists!  (Is it being attached somewhere else?)');
           }
           req.me = loggedInUser;
 
@@ -43,21 +48,21 @@ module.exports = function() {
           var now = Date.now();
           if (loggedInUser.lastSeenAt < now - MS_TO_BUFFER) {
             User.updateOne({id: loggedInUser.id}).
-              set({lastSeenAt: now}).
-              exec((err) => {
-                if (err) {
-                  sails.log.error(
-                    'Background task failed: Could not update user (`' +
-                    loggedInUser.id +
-                    '`) with a new `lastSeenAt` timestamp.  Error details: ' +
-                    err.stack);
-                  return;
-                }//•
-                sails.log.verbose(
-                  'Updated the `lastSeenAt` timestamp for user `' +
-                  loggedInUser.id + '`.');
-                // Nothing else to do here.
-              });//_∏_  (Meanwhile...)
+                set({lastSeenAt: now}).
+                exec((err) => {
+                  if (err) {
+                    sails.log.error(
+                        'Background task failed: Could not update user (`' +
+                        loggedInUser.id +
+                        '`) with a new `lastSeenAt` timestamp.  Error details: ' +
+                        err.stack);
+                    return;
+                  }//•
+                  sails.log.verbose(
+                      'Updated the `lastSeenAt` timestamp for user `' +
+                      loggedInUser.id + '`.');
+                  // Nothing else to do here.
+                });//_∏_  (Meanwhile...)
           }//ﬁ
 
           // If this is a GET request, then also expose an extra view local (`<%= me %>`).
@@ -66,7 +71,7 @@ module.exports = function() {
           if (req.method === 'GET') {
             if (res.locals.me !== undefined) {
               throw new Error(
-                'Cannot attach logged-in user as the view local `me`, because this view local already exists!  (Is it being attached somewhere else?)');
+                  'Cannot attach logged-in user as the view local `me`, because this view local already exists!  (Is it being attached somewhere else?)');
             }
 
             // Exclude any fields corresponding with attributes that have `protect: true`.
@@ -76,7 +81,7 @@ module.exports = function() {
             // (But also log a warning so this isn't hopelessly confusing.)
             if (sanitizedUser.password) {
               sails.log.warn(
-                'The logged in user record has a `password` property, but it was still there after pruning off all properties that match `protect: true` attributes in the User model.  So, just to be safe, removing the `password` property anyway...');
+                  'The logged in user record has a `password` property, but it was still there after pruning off all properties that match `protect: true` attributes in the User model.  So, just to be safe, removing the `password` property anyway...');
               delete sanitizedUser.password;
             }//ﬁ
 
