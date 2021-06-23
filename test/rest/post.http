@@ -3,9 +3,33 @@
 
 ###
 # create a post
-GET http://{{hostname}}:{{port}}/post/create?subject=test&author=60d014eeefc808d6d2afb7ad
+POST http://{{hostname}}:{{port}}/post
+Content-Type: application/json
+
+{
+  "title": "My first post",
+  "body": "This is <b>awesome</b><script>alert()</script>",
+  "author": "60d2e20f2ef36148927f06f8"
+}
 
 ###
 # create a post
-GET http://{{hostname}}:{{port}}/post
+POST http://{{hostname}}:{{port}}/post
+Content-Type: application/json
 
+{
+  "title": "My second post",
+  "body": "Beautiful :-)",
+  "author": "60d2e20f2ef36148927f06f8"
+}
+
+###
+# create a post
+POST http://{{hostname}}:{{port}}/post
+Content-Type: application/json
+
+{
+  "title": "I'm an admin and I can post",
+  "body": "... But no one really cares",
+  "author": "60d2e20f2ef36148927f06f9"
+}
