@@ -13,7 +13,7 @@
     "sails": "^1.4.3",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^3.0.2",
-    "sails-hook-rbac": "git+ssh://git@github.com/luislobo/sails-hook-rbac.git",
+    "sails-hook-rbac": "0.0.1",
     "sails-hook-sockets": "^2.0.0",
     "sails-mongo": "^2.0.0",
     "sanitize-html": "^2.4.0",
