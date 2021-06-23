@@ -3,13 +3,13 @@
 
 ###
 # create normal user
-GET http://{{hostname}}:{{port}}/user/create?fullName=Normal%20User&emailAddress=normal@example.com&password=normal@example.com&role=normal HTTP/1.1
+GET http://{{hostname}}:{{port}}/user/create?id=60d2e20f2ef36148927f06f8&&fullName=Normal%20User&emailAddress=normal@example.com&password=normal@example.com&role=normal HTTP/1.1
 Accept: application/json
 content-type: application/json
 
 ###
 # create admin user
-GET http://{{hostname}}:{{port}}/user/create?fullName=Admin%20User&emailAddress=admin@example.com&password=admin@example.com&role=normal HTTP/1.1
+GET http://{{hostname}}:{{port}}/user/create?id=60d2e20f2ef36148927f06f9&fullName=Admin%20User&emailAddress=admin@example.com&password=admin@example.com&role=normal HTTP/1.1
 Accept: application/json
 content-type: application/json
 
