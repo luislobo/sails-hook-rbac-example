@@ -5,5 +5,9 @@
   "_generatedWith": {
     "sails": "1.4.3",
     "sails-generate": "2.0.3"
+  },
+  "hooks": {
+    "sockets": false,
+    "pubsub": false
   }
 }
