@@ -1,14 +1,18 @@
 <h3 class="pb-4 mb-4 fst-italic border-bottom">
     What's new?
 </h3>
-<% if(me) { %>
+<% if(typeof me !== 'undefined' && me.fullName ) { %>
     <div class="col-md-4">
         <a class="btn btn-sm btn-outline-secondary" href="/post/create">Create</a>
+        <% if(me.role ==='admin') {%>
+            &nbsp;
+            <a class="btn btn-sm btn-outline-secondary" href="/post/admin">Manage Posts</a>
+        <%}%>
     </div>
 <% } %>
 
 <%
-if(posts.length === 0) {
+if(typeof posts !== 'undefined' && posts.length === 0) {
 %>
     <div>No posts yet!</div>
 <%

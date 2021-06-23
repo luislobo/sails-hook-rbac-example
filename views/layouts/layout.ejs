@@ -49,14 +49,14 @@
           <a class="blog-header-logo text-dark" href="#"><%= __('Sails Hook RBAC example.'); %></a>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
-          <% if(typeof me == 'undefined') { %>
-            <a class="btn btn-sm btn-outline-secondary" href="/login">Login</a>
-            &nbsp;
-            <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
-          <% } else { %>
+          <% if(typeof me !== 'undefined' && me.fullName ) { %>
             <span>Hi <%= me.fullName %></span>
             &nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="/logout">Logout</a>
+          <% } else { %>
+            <a class="btn btn-sm btn-outline-secondary" href="/login">Login</a>
+            &nbsp;
+            <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
           <% } %>
         </div>
       </div>

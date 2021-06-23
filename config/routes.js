@@ -61,6 +61,18 @@ module.exports.routes = {
     rbac: {anonymous: {}},
   },
 
+  'get /post/admin': {
+    controller: 'post',
+    action: 'admin',
+    rbac: {admin: {}},
+  },
+
+  'get /post/delete/:postId': {
+    controller: 'post',
+    action: 'delete',
+    rbac: {admin: {}},
+  },
+
   'get /post/create': {
     view: 'pages/post/create',
     rbac: {normal: {}},

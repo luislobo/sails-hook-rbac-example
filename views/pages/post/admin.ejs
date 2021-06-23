@@ -1,0 +1,42 @@
+<h3 class="pb-4 mb-4 fst-italic border-bottom">
+    What's new?
+</h3>
+<% if(typeof me !== 'undefined' && me.fullName ) { %>
+    <div class="col-md-4">
+        <a class="btn btn-sm btn-outline-secondary" href="/post/create">Create</a>
+        <% if(me.role === 'admin') { %>
+            &nbsp;
+            <a class="btn btn-sm btn-outline-secondary" href="/post/admin">Manage Posts</a>
+        <% } %>
+    </div>
+<% } %>
+
+<%
+if(typeof posts !== 'undefined' && posts.length === 0) {
+%>
+    <div>No posts yet!</div>
+<%
+} else {
+%>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <%
+        posts.forEach(function(post){ %>
+            <tr>
+                <td><%- s(post.title); %></td>
+                <td><%- s(post.author.fullName); %></td>
+                <td><%-  new Intl.DateTimeFormat('en-US').format(post.createdAt)  ; %></td>
+                <td><a class="btn btn-danger" href="/post/delete/<%-post.id%>">Delete</a></td>
+            </tr>
+        <% }); %>
+    </table>
+
+<% } %>
+

@@ -1,6 +1,15 @@
 #@hostname = localhost
 #@port = 30080
 
+
+###
+# login
+POST http://{{hostname}}:{{port}}/login
+Content-Type: application/json
+
+{
+   "emailAddress": ""
+
 ###
 # create a post
 POST http://{{hostname}}:{{port}}/post
