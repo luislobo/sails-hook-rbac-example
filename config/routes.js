@@ -21,6 +21,12 @@ module.exports.routes = {
     rbac: {anonymous: {}},
   },
 
+  'all /logout': {
+    controller: 'auth',
+    action: 'logout',
+    rbac: {anonymous: {}},
+  },
+
   'post /login': {
     controller: 'auth',
     action: 'login',
@@ -53,6 +59,11 @@ module.exports.routes = {
     controller: 'post',
     action: 'find',
     rbac: {anonymous: {}},
+  },
+
+  'get /post/create': {
+    view: 'pages/post/create',
+    rbac: {normal: {}},
   },
 
   'get /post/:postId': {
