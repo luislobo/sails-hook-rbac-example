@@ -1,17 +1,12 @@
-module.exports = function logout(req, res, next) {
+module.exports = async function login(req, res, next) {
 
-  // Attempt to signup a user using the provided parameters
-  User.signup({
-    fullName: req.param('fullName'),
-    emailAddress: req.param('email'),
-    password: req.param('password'),
-  }, function(err, user) {
-    // res.negotiate() will determine if this is a validation error
-    // or some kind of unexpected server error, then call `res.badRequest()`
-    // or `res.serverError()` accordingly.
-    if (err) {
-      return res.negotiate(err);
-    }
+  try {
+    // Attempt to signup a user using the provided parameters
+    const user = await User.signup({
+      fullName: req.param('fullName'),
+      emailAddress: req.param('email'),
+      password: req.param('password'),
+    });
 
     // Go ahead and log this user in as well.
     // We do this by "remembering" the user in the session.
@@ -26,5 +21,10 @@ module.exports = function logout(req, res, next) {
 
     // Otherwise if this is an HTML-wanting browser, redirect to /welcome.
     return res.redirect('/');
-  });
-};
+    
+  } catch (err) {
+    return res.serverError(err);
+  }
+
+}
+;

@@ -83,14 +83,14 @@ module.exports = {
    * @param  {Function} cb
    */
 
-  signup: function(inputs, cb) {
+  signup: async function(inputs, cb) {
     // Create a user
-    User.create({
+    return User.create({
       fullName: inputs.fullName,
       emailAddress: inputs.emailAddress,
       // TODO: But encrypt the password first
       password: inputs.password,
-    }).exec(cb);
+    }).fetch();
   },
 
   /**
