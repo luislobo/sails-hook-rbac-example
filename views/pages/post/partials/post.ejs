@@ -1,5 +1,6 @@
 <article class="blog-post">
     <h2 class="blog-post-title"><%= post.title %></h2>
+    <a class="btn btn-danger" href="/post/delete/<%-post.id%>">Delete</a>
     <p class="blog-post-meta"><%= new Intl.DateTimeFormat('en-US', {hour: "numeric", dayPeriod: "short"}).format(post.createdAt)  %> by <a href="#"><%= post.author.fullName %></a></p>
     <%- s(post.body) %>
 </article>

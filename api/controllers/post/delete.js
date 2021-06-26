@@ -3,5 +3,8 @@ module.exports = async (req, res) => {
   if (postId) {
     await Post.destroy(postId);
   }
-  res.redirect('/post/admin');
+  if (req.me && req.me.role === 'normal') {
+    return res.redirect('/');
+  }
+  return res.redirect('/post/admin');
 };

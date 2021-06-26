@@ -70,7 +70,14 @@ module.exports.routes = {
   'get /post/delete/:postId': {
     controller: 'post',
     action: 'delete',
-    rbac: {admin: {}},
+    rbac: {
+      normal: {
+        when: function(params, next) {
+          return sails.services.rbachelpersservice.isAuthor(params, next);
+        },
+      },
+      admin: {},
+    },
   },
 
   'get /post/create': {

@@ -5,8 +5,13 @@ module.exports.rbac = {
     {a: 'admin', can: 'normal'},
   ],
   helper: {
-    path: 'services.RbacHelpers',
+    path: 'services.RbacHelpersService',
   },
+  waitFor: [
+    'passport',
+    'session',
+    'orm',
+  ],
   sessionObject: 'me',
   sessionObjectRolePath: 'role',
 };
